@@ -6,3 +6,4 @@ google-play-scraper
 pandas
 google-play-scraper
 pandas
+schedule
