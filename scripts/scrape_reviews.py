@@ -24,7 +24,7 @@ for bank, app_id in apps.items():
             lang='en',
             country='us',
             sort=Sort.NEWEST,
-            count=450
+            count=550
         )
 
         for r in result:
