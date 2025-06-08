@@ -9,3 +9,5 @@ pandas
 schedule
 transformers
 torch
+scikit-learn
+nltk
