@@ -1,49 +1,49 @@
-# fintech-review-insights
-Analyzing user reviews of Ethiopian fintech apps from Google Play Store
-# 🎯 Task 2 – Sentiment and Thematic Analysis
+# 🗃️ Task 3 – Store Cleaned Data in Oracle Database
 
-This branch (`task-2`) implements sentiment classification and theme extraction on user reviews of three Ethiopian banking apps collected from the Google Play Store.
+This branch (`task-3`) implements persistent storage of processed fintech app review data into an Oracle Database as part of the 10 Academy AI Mastery Week 2 challenge.
 
 ---
 
-## ✅ Goals
+## 🎯 Objectives
 
-- Label reviews with `positive`, `negative`, or `neutral` sentiments
-- Compute sentiment scores per review
-- Extract top keywords per bank using **TF-IDF**
-- Group keywords into 3–5 themes (e.g., Transaction Performance, UI/UX)
-- Save labeled and summarized results for downstream tasks
-
----
-
-## 📁 Project Structure
-
-| Path                             | Description                               |
-|----------------------------------|-------------------------------------------|
-| `data/processed/`                | Cleaned, labeled, and summarized datasets |
-| `scripts/processing/`            | Python scripts for NLP analysis           |
-| `requirements.txt`               | Python dependencies                       |
+- Design and create a normalized relational schema in Oracle
+- Insert >1000 reviews labeled with sentiment using Python
+- Ensure banks and reviews are properly linked via foreign keys
+- Export database structure as an SQL dump
 
 ---
 
-## 🧪 Scripts
+## 🏗️ Schema Overview
 
-- `sentiment_analysis.py`: Adds sentiment labels and scores using DistilBERT
-- `theme_extraction.py`: Extracts top TF-IDF keywords and maps to custom themes
+**`banks` table**  
+- `bank_id` (PK)  
+- `bank_name` (unique)
 
----
-
-## 📊 Data Output
-
-| File Name                                     | Description                                  |
-|----------------------------------------------|----------------------------------------------|
-| `fintech_reviews_with_sentiment.csv`         | All reviews labeled with sentiment & score   |
-| `sentiment_summary_by_bank_and_rating.csv`   | Aggregated sentiment score per bank + rating |
-| `theme_summary_by_bank.csv`                  | Top keywords + mapped themes per bank        |
+**`reviews` table**  
+- `review_id` (PK)  
+- `review_text`, `rating`, `review_date`  
+- `bank_id` (FK → `banks.bank_id`)  
+- `sentiment_label`, `sentiment_score`
 
 ---
 
-## 📌 Notes
+## 📂 Project Structure
 
-- Review data is originally from Task 1 (`fintech_reviews_clean.csv`)
-- All code is modular and reproducible
+fintech-review-insights/
+├── data/
+│ └── processed/
+│ └── fintech_reviews_with_sentiment.csv
+├── scripts/
+│ └── database/
+│ ├── create_tables_oracle.sql
+│ ├── upload_to_oracle.py
+│ └── dump_bank_reviews.sql
+
+---
+
+## ⚙️ How to Run
+
+Make sure Oracle XE is running.
+
+```bash
+python scripts/database/upload_to_oracle.py
